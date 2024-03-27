@@ -36,7 +36,7 @@ entity top_level is
            rst : in STD_LOGIC;
            sw : in STD_LOGIC_VECTOR (15 downto 0);
            servo_pwm : out STD_LOGIC_VECTOR (7 downto 0);
-           servo_position : out STD_LOGIC_VECTOR (7 downto 0);
+           servo_pos : out STD_LOGIC_VECTOR (7 downto 0);
            led : out STD_LOGIC_VECTOR (15 downto 0));
 end top_level;
 
@@ -52,5 +52,12 @@ begin
         pwm_counter <= 0;
         pwm_out <= '0';
     elseif rising_edge(clk) then
+        if pwm_counter < servo_angle then
+            pwm_out <= '1';
+        else
+            pwm_out <= '0';
+        end if;   
+            pwm_counter <= pwm_counter +1;
+        if pwm_counter >= PWM_counter
 
 end Behavioral;
