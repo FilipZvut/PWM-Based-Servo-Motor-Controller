@@ -1,24 +1,31 @@
--- clock_generator.vhd
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.NUMERIC_STD.ALL;
-
-entity clock_generator is
+ 
+entity clk64kHz is
     Port (
-        clk : out STD_LOGIC
+        clk    : in  STD_LOGIC;
+        reset  : in  STD_LOGIC;
+        clk_out: out STD_LOGIC
     );
-end clock_generator;
-
-architecture Behavioral of clock_generator is
-    constant CLOCK_PERIOD : time := 10 ns; -- 100 MHz clock
+end clk64kHz;
+ 
+architecture Behavioral of clk64kHz is
+    signal temporal: STD_LOGIC;
+    signal counter : integer range 0 to 780 := 0;
 begin
-    clk_process: process
-    begin
-        while true loop
-            clk <= '0';
-            wait for CLOCK_PERIOD / 2;
-            clk <= '1';
-            wait for CLOCK_PERIOD / 2;
-        end loop;
-    end process clk_process;
+    freq_divider: process (reset, clk) begin
+        if (reset = '1') then
+            temporal <= '0';
+            counter  <= 0;
+        elsif rising_edge(clk) then
+            if (counter = 780) then
+                temporal <= NOT(temporal);
+                counter  <= 0;
+            else
+                counter <= counter + 1;
+            end if;
+        end if;
+    end process;
+ 
+    clk_out <= temporal;
 end Behavioral;

@@ -1,71 +1,36 @@
--- servo_controller.vhd
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
-entity servo_controller is
-    Port (
-        clk : in STD_LOGIC;
-        btn : in STD_LOGIC_VECTOR(3 downto 0);
-        pwm_output : out STD_LOGIC_VECTOR(7 downto 0);
-        servo_enable : out STD_LOGIC;
-        servo_pwm : out STD_LOGIC;
-        servo_direction : out STD_LOGIC
+entity servo_pwm is
+    PORT (
+        clk   : IN  STD_LOGIC;
+        reset : IN  STD_LOGIC;
+        pos   : IN  STD_LOGIC_VECTOR(6 downto 0);
+        servo : OUT STD_LOGIC
     );
-end servo_controller;
+end servo_pwm;
 
-architecture Behavioral of servo_controller is
-    constant CLK_FREQ : integer := 100_000_000; -- 100MHz clock frequency
-    constant PWM_FREQ : integer := 50; -- PWM frequency in Hz (50 Hz for servo motors)
-    constant PERIOD_COUNT : integer := CLK_FREQ / PWM_FREQ;
-    signal counter : unsigned(15 downto 0) := (others => '0');
-    signal servo_angle : unsigned(7 downto 0) := (others => '0');
-    signal servo_enabled : boolean := false;
+architecture Behavioral of servo_pwm is
+    -- Counter, from 0 to 1279.
+    signal cnt : unsigned(10 downto 0);
+    -- Temporal signal used to generate the PWM pulse.
+    signal pwmi: unsigned(7 downto 0);
 begin
-
-    -- Servo PWM generation process
-    servo_pwm_process: process(clk)
-    begin
-        if rising_edge(clk) then
-            if servo_enabled then
-                if counter = to_unsigned(0, counter'length) then
-                    servo_pwm <= '1'; -- High for duty cycle period
-                    if servo_angle < 255 then
-                        servo_angle <= servo_angle + 1;
-                    else
-                        servo_angle <= (others => '0');
-                    end if;
-                else
-                    servo_pwm <= '0'; -- Low for remaining period
-                end if;
-                counter <= counter + 1;
+    -- Minimum value should be 0.5ms.
+    pwmi <= unsigned('0' & pos) + 32;
+    -- Counter process, from 0 to 1279.
+    counter: process (reset, clk) begin
+        if (reset = '1') then
+            cnt <= (others => '0');
+        elsif rising_edge(clk) then
+            if (cnt = 1279) then
+                cnt <= (others => '0');
             else
-                servo_pwm <= '0'; -- Keep PWM low when servo is disabled
+                cnt <= cnt + 1;
             end if;
         end if;
-    end process servo_pwm_process;
-
-    -- Servo control process
-    servo_control_process: process(clk)
-    begin
-        if rising_edge(clk) then
-            if btn(0) = '1' then -- Enable servo when button 0 is pressed
-                servo_enabled <= true;
-            elsif btn(1) = '1' then -- Disable servo when button 1 is pressed
-                servo_enabled <= false;
-            end if;
-            
-            -- Example of servo angle control based on button presses
-            if btn(2) = '1' then -- Rotate servo clockwise
-                servo_direction <= '1';
-            elsif btn(3) = '1' then -- Rotate servo counterclockwise
-                servo_direction <= '0';
-            end if;
-        end if;
-    end process servo_control_process;
-
-    -- Output servo control signals
-    servo_enable <= '1'; -- Always enable servo
-    pwm_output <= std_logic_vector(servo_angle); -- Output current servo angle
-
+    end process;
+    -- Output signal for the servomotor.
+    servo <= '1' when (cnt < pwmi) else '0';
 end Behavioral;

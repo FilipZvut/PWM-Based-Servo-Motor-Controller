@@ -1,37 +1,40 @@
--- servo_controller_top.vhd
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity servo_controller_top is
-    Port (
-        clk : in STD_LOGIC;
-        btn : in STD_LOGIC_VECTOR(3 downto 0);
-        pwm_output : out STD_LOGIC_VECTOR(7 downto 0);
-        servo_enable : out STD_LOGIC;
-        servo_pwm : out STD_LOGIC;
-        servo_direction : out STD_LOGIC
+entity servo_pwm_clk64kHz is
+    PORT(
+        clk  : IN  STD_LOGIC;
+        reset: IN  STD_LOGIC;
+        pos  : IN  STD_LOGIC_VECTOR(6 downto 0);
+        servo: OUT STD_LOGIC
     );
-end servo_controller_top;
+end servo_pwm_clk64kHz;
 
-architecture Behavioral of servo_controller_top is
-    component servo_controller
-        Port (
-            clk : in STD_LOGIC;
-            btn : in STD_LOGIC_VECTOR(3 downto 0);
-            pwm_output : out STD_LOGIC_VECTOR(7 downto 0);
-            servo_enable : out STD_LOGIC;
-            servo_pwm : out STD_LOGIC;
-            servo_direction : out STD_LOGIC
+architecture Behavioral of servo_pwm_clk64kHz is
+    COMPONENT clk64kHz
+        PORT(
+            clk    : in  STD_LOGIC;
+            reset  : in  STD_LOGIC;
+            clk_out: out STD_LOGIC
         );
-    end component;
+    END COMPONENT;
+    
+    COMPONENT servo_pwm
+        PORT (
+            clk   : IN  STD_LOGIC;
+            reset : IN  STD_LOGIC;
+            pos   : IN  STD_LOGIC_VECTOR(6 downto 0);
+            servo : OUT STD_LOGIC
+        );
+    END COMPONENT;
+    
+    signal clk_out : STD_LOGIC := '0';
 begin
-    servo_inst : servo_controller
-        port map (
-            clk => clk,
-            btn => btn,
-            pwm_output => pwm_output,
-            servo_enable => servo_enable,
-            servo_pwm => servo_pwm,
-            servo_direction => servo_direction
-        );
+    clk64kHz_map: clk64kHz PORT MAP(
+        clk, reset, clk_out
+    );
+    
+    servo_pwm_map: servo_pwm PORT MAP(
+        clk_out, reset, pos, servo
+    );
 end Behavioral;

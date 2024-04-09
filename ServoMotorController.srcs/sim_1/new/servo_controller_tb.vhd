@@ -1,59 +1,60 @@
--- servo_controller_tb.vhd
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-
-entity servo_controller_tb is
-end servo_controller_tb;
-
-architecture Behavioral of servo_controller_tb is
-    signal clk : STD_LOGIC := '0';
-    signal btn : STD_LOGIC_VECTOR(3 downto 0) := (others => '0');
-    signal pwm_output : STD_LOGIC_VECTOR(7 downto 0);
-    signal servo_enable : STD_LOGIC;
-    signal servo_pwm : STD_LOGIC;
-    signal servo_direction : STD_LOGIC;
-begin
-    -- Instantiate the unit under test (UUT)
-    uut: entity work.servo_controller_top
-        port map (
-            clk => clk,
-            btn => btn,
-            pwm_output => pwm_output,
-            servo_enable => servo_enable,
-            servo_pwm => servo_pwm,
-            servo_direction => servo_direction
-           
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+ 
+ENTITY servo_pwm_clk64kHz_tb IS
+END servo_pwm_clk64kHz_tb;
+ 
+ARCHITECTURE behavior OF servo_pwm_clk64kHz_tb IS
+    -- Unit under test.
+    COMPONENT servo_pwm_clk64kHz
+        PORT(
+            clk   : IN  std_logic;
+            reset : IN  std_logic;
+            pos   : IN  std_logic_vector(6 downto 0);
+            servo : OUT std_logic
         );
+    END COMPONENT;
 
-    -- Clock process
-    clk_process: process
-    begin
-        while now < 1000 ns loop
-            clk <= not clk;
-            wait for 5 ns; -- 100 MHz clock (10 ns period)
-        end loop;
+    -- Inputs.
+    signal clk  : std_logic := '0';
+    signal reset: std_logic := '0';
+    signal pos  : std_logic_vector(6 downto 0) := (others => '0');
+    -- Outputs.
+    signal servo : std_logic;
+    -- Clock definition.
+    constant clk_period : time := 10 ns;
+BEGIN
+    -- Instance of the unit under test.
+    uut: servo_pwm_clk64kHz PORT MAP (
+        clk => clk,
+        reset => reset,
+        pos => pos,
+        servo => servo
+    );
+
+   -- Definition of the clock process.
+   clk_process :process begin
+        clk <= '0';
+        wait for clk_period/2;
+        clk <= '1';
+        wait for clk_period/2;
+   end process;
+ 
+    -- Stimuli process.
+    stimuli: process begin
+        reset <= '1';
+        wait for 50 ns;
+        reset <= '0';
+        wait for 50 ns;
+        pos <= "0000000";
+        wait for 20 ms;
+        pos <= "0101000";
+        wait for 20 ms;
+        pos <= "1010000";
+        wait for 20 ms;
+        pos <= "1111000";
+        wait for 20 ms;
+        pos <= "1111111";
         wait;
-    end process clk_process;
-
-    -- Stimulus process
-    stim_process: process
-    begin
-        btn <= "0001"; -- Set button 0 to pressed initially
-        wait for 500 ns;
-        btn <= "0000"; -- Release button 0
-        wait for 500 ns;
-        btn <= "0010"; -- Set button 1 to pressed
-        wait for 500 ns;
-        btn <= "0000"; -- Release button 1
-        wait for 500 ns;
-        btn <= "0100"; -- Set button 2 to pressed
-        wait for 500 ns;
-        btn <= "0000"; -- Release button 2
-        wait for 500 ns;
-        btn <= "1000"; -- Set button 3 to pressed
-        wait for 500 ns;
-        btn <= "0000"; -- Release button 3
-        wait;
-    end process stim_process;
-
-end Behavioral;
+    end process;
+END;
