@@ -2,39 +2,48 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 entity servo_pwm_clk64kHz is
-    PORT(
-        clk  : IN  STD_LOGIC;
-        reset: IN  STD_LOGIC;
-        pos  : IN  STD_LOGIC_VECTOR(6 downto 0);
-        servo: OUT STD_LOGIC
+    Port(
+        clk  : in  STD_LOGIC;
+        reset: in  STD_LOGIC;
+        LED : out std_logic_vector(6 downto 0);
+        pos  : in  STD_LOGIC_VECTOR(6 downto 0);
+        servo: out STD_LOGIC
     );
 end servo_pwm_clk64kHz;
 
 architecture Behavioral of servo_pwm_clk64kHz is
-    COMPONENT clk64kHz
-        PORT(
+    component clk64kHz
+        port(
             clk    : in  STD_LOGIC;
             reset  : in  STD_LOGIC;
             clk_out: out STD_LOGIC
         );
-    END COMPONENT;
+    end component;
     
-    COMPONENT servo_pwm
-        PORT (
+    component servo_pwm
+        Port (
             clk   : IN  STD_LOGIC;
             reset : IN  STD_LOGIC;
             pos   : IN  STD_LOGIC_VECTOR(6 downto 0);
             servo : OUT STD_LOGIC
         );
-    END COMPONENT;
+    end component;
     
     signal clk_out : STD_LOGIC := '0';
 begin
-    clk64kHz_map: clk64kHz PORT MAP(
-        clk, reset, clk_out
+    clk64kHz_map: clk64kHz port map(
+        clk => clk, 
+        reset => reset, 
+        clk_out => clk_out
     );
     
-    servo_pwm_map: servo_pwm PORT MAP(
-        clk_out, reset, pos, servo
+    servo_pwm_map: servo_pwm port map(
+        clk=> clk_out,
+        reset => reset, 
+        pos => pos, 
+        servo =>servo
     );
+   
+    LED <= pos;
+    
 end Behavioral;
