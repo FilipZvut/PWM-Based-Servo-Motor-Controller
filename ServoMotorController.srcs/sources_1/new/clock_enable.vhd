@@ -10,7 +10,7 @@ entity clk64kHz is
 end clk64kHz;
  
 architecture Behavioral of clk64kHz is
-    signal sig_temp: STD_LOGIC;
+    signal sig_temp    : STD_LOGIC;
     signal sig_counter : integer range 0 to 780 := 0;
     
 begin

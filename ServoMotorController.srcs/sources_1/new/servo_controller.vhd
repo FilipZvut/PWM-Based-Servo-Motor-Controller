@@ -4,10 +4,10 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity servo_pwm is
     Port (
-        clk   : IN  STD_LOGIC;
-        reset : IN  STD_LOGIC;
-        pos   : IN  STD_LOGIC_VECTOR(6 downto 0);
-        servo : OUT STD_LOGIC
+        clk   : in  STD_LOGIC;
+        reset : in  STD_LOGIC;
+        pos   : in  STD_LOGIC_VECTOR(6 downto 0);
+        servo : out STD_LOGIC
     );
 end servo_pwm;
 

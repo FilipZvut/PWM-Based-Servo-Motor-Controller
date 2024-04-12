@@ -5,8 +5,8 @@ entity servo_pwm_clk64kHz is
     Port(
         clk  : in  STD_LOGIC;
         reset: in  STD_LOGIC;
-        LED : out std_logic_vector(6 downto 0);
         pos  : in  STD_LOGIC_VECTOR(6 downto 0);
+        LED  : out STD_LOGIC_VECTOR(6 downto 0);
         servo: out STD_LOGIC
     );
 end servo_pwm_clk64kHz;
@@ -22,10 +22,10 @@ architecture Behavioral of servo_pwm_clk64kHz is
     
     component servo_pwm
         Port (
-            clk   : IN  STD_LOGIC;
-            reset : IN  STD_LOGIC;
-            pos   : IN  STD_LOGIC_VECTOR(6 downto 0);
-            servo : OUT STD_LOGIC
+            clk   : in  STD_LOGIC;
+            reset : in  STD_LOGIC;
+            pos   : in  STD_LOGIC_VECTOR(6 downto 0);
+            servo : out STD_LOGIC
         );
     end component;
     
