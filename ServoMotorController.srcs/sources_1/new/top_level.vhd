@@ -6,8 +6,11 @@ entity servo_pwm_clk64kHz is
         clk  : in  STD_LOGIC;
         reset: in  STD_LOGIC;
         pos  : in  STD_LOGIC_VECTOR(6 downto 0);
+        pos2  : in  STD_LOGIC_VECTOR(6 downto 0);
         LED  : out STD_LOGIC_VECTOR(6 downto 0);
-        servo: out STD_LOGIC
+        LED2  : out STD_LOGIC_VECTOR(6 downto 0);
+        servo: out STD_LOGIC;
+        servo2: out STD_LOGIC
     );
 end servo_pwm_clk64kHz;
 
@@ -43,7 +46,15 @@ begin
         pos => pos, 
         servo =>servo
     );
+        
+    servo_pwm_map2: servo_pwm port map(
+        clk=> clk_out,
+        reset => reset, 
+        pos => pos2, 
+        servo =>servo2
+    );
    
-    LED <= pos;
+    LED  <= pos;
+    LED2 <= pos2;
     
 end Behavioral;

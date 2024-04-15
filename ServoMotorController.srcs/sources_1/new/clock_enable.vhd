@@ -11,7 +11,7 @@ end clk64kHz;
  
 architecture Behavioral of clk64kHz is
     signal sig_temp    : STD_LOGIC;
-    signal sig_counter : integer range 0 to 780 := 0;
+    signal sig_counter : integer range 0 to 781 := 0;
     
 begin
     freq_divider: process (reset, clk) begin
@@ -19,7 +19,7 @@ begin
             sig_temp <= '0';
             sig_counter  <= 0;
         elsif rising_edge(clk) then
-            if (sig_counter = 780) then
+            if (sig_counter = 781) then
                 sig_temp     <= NOT(sig_temp);
                 sig_counter  <= 0;
             else
