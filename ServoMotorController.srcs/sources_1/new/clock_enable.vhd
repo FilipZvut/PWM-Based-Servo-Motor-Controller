@@ -1,32 +1,41 @@
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
- 
-entity clk64kHz is
-    Port (
-        clk    : in  STD_LOGIC;
-        reset  : in  STD_LOGIC;
-        clk_out: out STD_LOGIC
+    use IEEE.STD_LOGIC_1164.all;
+
+-------------------------------------------------
+
+entity clock_enable is
+    generic (
+        N_PERIODS : integer := 777
     );
-end clk64kHz;
- 
-architecture Behavioral of clk64kHz is
-    signal sig_temp    : STD_LOGIC;
-    signal sig_counter : integer range 0 to 781 := 0;
-    
+    port (
+        clk   : in    std_logic;
+        rst   : in    std_logic;
+        pulse : out   std_logic
+    );
+end entity clock_enable;
+
+-------------------------------------------------
+
+architecture behavioral of clock_enable is
+    signal sig_count : integer range 0 to N_PERIODS - 1 :=0;
+
 begin
-    freq_divider: process (reset, clk) begin
-        if (reset = '1') then
-            sig_temp <= '0';
-            sig_counter  <= 0;
-        elsif rising_edge(clk) then
-            if (sig_counter = 781) then
-                sig_temp     <= NOT(sig_temp);
-                sig_counter  <= 0;
+    p_clk_enable : process (clk) is
+    begin
+
+        if (rising_edge(clk)) then                   
+            if (rst = '1') then                      
+                sig_count <= 0;  
+            elsif (sig_count < (N_PERIODS - 1)) then
+                sig_count <= sig_count + 1;         
             else
-                sig_counter  <= sig_counter + 1;
-            end if;
+                sig_count <= 0;
+            end if;                                  
         end if;
-    end process;
- 
-    clk_out <= sig_temp;
-end Behavioral;
+
+    end process p_clk_enable;
+
+    pulse <= '1' when (sig_count = N_PERIODS - 1) else
+             '0';
+             
+end architecture behavioral;

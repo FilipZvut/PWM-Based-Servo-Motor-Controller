@@ -2,16 +2,20 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
-entity servo_pwm is
+-------------------------------------------------
+
+entity servo_controller is
     Port (
         clk   : in  STD_LOGIC;
         reset : in  STD_LOGIC;
         pos   : in  STD_LOGIC_VECTOR(6 downto 0);
         servo : out STD_LOGIC
     );
-end servo_pwm;
+end servo_controller;
 
-architecture Behavioral of servo_pwm is
+-------------------------------------------------
+
+architecture Behavioral of servo_controller is
     
     signal cnt : unsigned(10 downto 0);
     

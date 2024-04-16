@@ -1,29 +1,36 @@
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
+    use IEEE.STD_LOGIC_1164.ALL;
+    
+-------------------------------------------------
 
-entity servo_pwm_clk64kHz is
-    Port(
-        clk  : in  STD_LOGIC;
-        reset: in  STD_LOGIC;
-        pos  : in  STD_LOGIC_VECTOR(6 downto 0);
-        pos2  : in  STD_LOGIC_VECTOR(6 downto 0);
-        LED  : out STD_LOGIC_VECTOR(6 downto 0);
-        LED2  : out STD_LOGIC_VECTOR(6 downto 0);
-        servo: out STD_LOGIC;
-        servo2: out STD_LOGIC
+entity top_level is
+    port(
+        CLK100MHZ   : in  STD_LOGIC;
+        BTNC        : in  STD_LOGIC;
+        pos         : in  STD_LOGIC_VECTOR(6 downto 0);
+        pos2        : in  STD_LOGIC_VECTOR(6 downto 0);
+        LED         : out STD_LOGIC_VECTOR(6 downto 0);
+        LED2        : out STD_LOGIC_VECTOR(6 downto 0);
+        servo       : out STD_LOGIC;
+        servo2      : out STD_LOGIC
     );
-end servo_pwm_clk64kHz;
+end top_level;
 
-architecture Behavioral of servo_pwm_clk64kHz is
-    component clk64kHz
-        port(
-            clk    : in  STD_LOGIC;
-            reset  : in  STD_LOGIC;
-            clk_out: out STD_LOGIC
+-------------------------------------------------
+
+architecture Behavioral of top_level is
+     component clock_enable is
+        generic (
+            N_PERIODS : integer
+        );
+        port (
+            clk   : in    std_logic;
+            rst   : in    std_logic;
+            pulse : out   std_logic
         );
     end component;
     
-    component servo_pwm
+    component servo_controller
         Port (
             clk   : in  STD_LOGIC;
             reset : in  STD_LOGIC;
@@ -34,25 +41,31 @@ architecture Behavioral of servo_pwm_clk64kHz is
     
     signal clk_out : STD_LOGIC := '0';
 begin
-    clk64kHz_map: clk64kHz port map(
-        clk => clk, 
-        reset => reset, 
-        clk_out => clk_out
-    );
+    clock_enable_map : component clock_enable
+        generic map (
+            N_PERIODS => 1562
+        )
+        port map (
+            clk   => CLK100MHZ,
+            rst   => BTNC,
+            pulse => clk_out
+        );
     
-    servo_pwm_map: servo_pwm port map(
-        clk=> clk_out,
-        reset => reset, 
-        pos => pos, 
-        servo =>servo
-    );
+    servo_controller1_map: servo_controller 
+        port map(
+            clk   => clk_out,
+            reset => BTNC, 
+            pos   => pos, 
+            servo => servo
+        );
         
-    servo_pwm_map2: servo_pwm port map(
-        clk=> clk_out,
-        reset => reset, 
-        pos => pos2, 
-        servo =>servo2
-    );
+    servo_controller2_map: servo_controller 
+        port map(
+            clk   => clk_out,
+            reset => BTNC, 
+            pos   => pos2, 
+            servo => servo2
+        );
    
     LED  <= pos;
     LED2 <= pos2;
