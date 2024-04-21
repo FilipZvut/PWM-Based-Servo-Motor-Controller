@@ -6,10 +6,10 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity servo_controller is
     Port (
-        clk   : in  STD_LOGIC;
-        reset : in  STD_LOGIC;
-        pos   : in  STD_LOGIC_VECTOR(6 downto 0);
-        servo : out STD_LOGIC
+        clk   : in  std_logic;
+        reset : in  std_logic;
+        pos   : in  std_logic_vector(6 downto 0);
+        servo : out std_logic
     );
 end servo_controller;
 

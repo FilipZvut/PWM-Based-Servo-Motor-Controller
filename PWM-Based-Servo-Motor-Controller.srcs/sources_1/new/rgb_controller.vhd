@@ -5,11 +5,11 @@ use IEEE.NUMERIC_STD.ALL;
 -------------------------------------------------
 
 entity rgb_controller is
-    Port ( led_b : out STD_LOGIC;
-           led_r : out STD_LOGIC;
-           led_g : out STD_LOGIC;
-           pos   : in STD_LOGIC_VECTOR (6 downto 0);
-           reset : in STD_LOGIC);
+    Port ( led_b : out std_logic;
+           led_r : out std_logic;
+           led_g : out std_logic;
+           pos   : in std_logic_vector (6 downto 0);
+           reset : in std_logic);
 end rgb_controller;
 
 -------------------------------------------------

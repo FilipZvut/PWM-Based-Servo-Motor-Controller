@@ -12,23 +12,23 @@ architecture behavior of servo_controller_clk64kHz_tb IS
     
     component top_level
         Port(
-            CLK100MHZ   : IN  std_logic;
-            BTNC : IN  std_logic;
-            pos   : IN  std_logic_vector(6 downto 0);
-            pos2   : IN  std_logic_vector(6 downto 0);
-            servo : OUT std_logic;
-            servo2 : OUT std_logic
+            CLK100MHZ   : in  std_logic;
+            BTNC        : in  std_logic;
+            pos         : in  std_logic_vector(6 downto 0);
+            pos2        : in  std_logic_vector(6 downto 0);
+            servo       : out std_logic;
+            servo2      : out std_logic
         );
     end component;
 
 -------------------------------------------------
    
-    signal clk  : std_logic := '0';
-    signal reset: std_logic := '0';
-    signal pos  : std_logic_vector(6 downto 0) := (others => '0');
-    signal pos2  : std_logic_vector(6 downto 0) := (others => '0');
-    signal servo : std_logic;
-    signal servo2 : std_logic;
+    signal clk          : std_logic := '0';
+    signal reset        : std_logic := '0';
+    signal pos          : std_logic_vector(6 downto 0) := (others => '0');
+    signal pos2         : std_logic_vector(6 downto 0) := (others => '0');
+    signal servo        : std_logic;
+    signal servo2       : std_logic;
     constant clk_period : time := 10 ns;
 
 -------------------------------------------------
@@ -37,11 +37,11 @@ begin
    
     dut : top_level port map (
         CLK100MHZ => clk,
-        BTNC => reset,
-        pos => pos,
-        pos2 => pos2,
-        servo => servo,
-        servo2 => servo2
+        BTNC      => reset,
+        pos       => pos,
+        pos2      => pos2,
+        servo     => servo,
+        servo2    => servo2
     );
 
   

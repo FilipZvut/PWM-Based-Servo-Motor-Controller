@@ -5,20 +5,20 @@ library IEEE;
 
 entity top_level is
     port(
-        CLK100MHZ   : in  STD_LOGIC;
-        BTNC        : in  STD_LOGIC;
-        pos         : in  STD_LOGIC_VECTOR(6 downto 0);
-        pos2        : in  STD_LOGIC_VECTOR(6 downto 0);
-        LED         : out STD_LOGIC_VECTOR(6 downto 0);
-        LED2        : out STD_LOGIC_VECTOR(6 downto 0);
-        servo       : out STD_LOGIC;
-        servo2      : out STD_LOGIC;
-        LED_B       : out STD_LOGIC;
-        LED_G       : out STD_LOGIC;
-        LED_R       : out STD_LOGIC;
-        LED_B2      : out STD_LOGIC;
-        LED_G2      : out STD_LOGIC;
-        LED_R2      : out STD_LOGIC
+        CLK100MHZ   : in  std_logic;
+        BTNC        : in  std_logic;
+        pos         : in  std_logic_vector(6 downto 0);
+        pos2        : in  std_logic_vector(6 downto 0);
+        LED         : out std_logic_vector(6 downto 0);
+        LED2        : out std_logic_vector(6 downto 0);
+        servo       : out std_logic;
+        servo2      : out std_logic;
+        LED_B       : out std_logic;
+        LED_G       : out std_logic;
+        LED_R       : out std_logic;
+        LED_B2      : out std_logic;
+        LED_G2      : out std_logic;
+        LED_R2      : out std_logic
     );
 end top_level;
 
@@ -38,24 +38,24 @@ architecture Behavioral of top_level is
     
     component servo_controller
         port (
-            clk   : in  STD_LOGIC;
-            reset : in  STD_LOGIC;
-            pos   : in  STD_LOGIC_VECTOR(6 downto 0);
-            servo : out STD_LOGIC
+            clk   : in  std_logic;
+            reset : in  std_logic;
+            pos   : in  std_logic_vector(6 downto 0);
+            servo : out std_logic
         );
     end component;
     
     component rgb_controller
         port (
-            reset : in  STD_LOGIC;
-            pos   : in  STD_LOGIC_VECTOR(6 downto 0);
-            led_b : out STD_LOGIC;
-            led_r : out STD_LOGIC;
-            led_g : out STD_LOGIC
+            reset : in  std_logic;
+            pos   : in  std_logic_vector(6 downto 0);
+            led_b : out std_logic;
+            led_r : out std_logic;
+            led_g : out std_logic
         );
     end component;
     
-    signal clk_out : STD_LOGIC := '0';
+    signal clk_out : std_logic := '0';
 begin
     clock_enable_map : component clock_enable
         generic map (
