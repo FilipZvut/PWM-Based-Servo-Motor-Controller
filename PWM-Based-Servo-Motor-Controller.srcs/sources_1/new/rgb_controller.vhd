@@ -19,7 +19,7 @@ architecture Behavioral of rgb_controller is
     signal pos_status: unsigned(6 downto 0);
 begin
     pos_status <= unsigned(pos);
-    pos_statusessss: process (pos, reset) begin
+    led_control_proces: process (pos, reset) begin
        
     if (reset = '0') then   
         if (pos_status <= 43) then
@@ -41,6 +41,6 @@ begin
         led_b <= '0'; 
     end if;       
 
-end process pos_statusessss;
+end process led_control_proces;
 
 end Behavioral;
