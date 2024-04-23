@@ -16,21 +16,21 @@ end rgb_controller;
 
 architecture Behavioral of rgb_controller is
 
-    signal pos_status: unsigned(6 downto 0);
+    signal sig_pos_status: unsigned(6 downto 0);
 begin
-    pos_status <= unsigned(pos);
-    led_control_proces: process (pos, reset) begin
+    sig_pos_status <= unsigned(pos);
+    p_led_control_proces: process (pos, reset) begin
        
     if (reset = '0') then   
-        if (pos_status <= 43) then
+        if (sig_pos_status <= 43) then
             led_r <= '1';
             led_g <= '0';
             led_b <= '0';
-        elsif ( (pos_status > 43) AND (pos_status <= 86)) then
+        elsif ( (sig_pos_status > 43) AND (sig_pos_status <= 86)) then
             led_b <= '1';
             led_r <= '0';
             led_g <= '0';
-        elsif ( (pos_status > 86) AND (pos_status < 128)) then
+        elsif ( (sig_pos_status > 86) AND (sig_pos_status < 128)) then
             led_g <= '1';
             led_r <= '0';
             led_b <= '0';            
@@ -41,6 +41,6 @@ begin
         led_b <= '0'; 
     end if;       
 
-end process led_control_proces;
+end process p_led_control_proces;
 
 end Behavioral;

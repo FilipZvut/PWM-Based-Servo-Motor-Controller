@@ -17,24 +17,24 @@ end servo_controller;
 
 architecture Behavioral of servo_controller is
     
-    signal cnt : unsigned(10 downto 0);
+    signal sig_cnt : unsigned(10 downto 0);
     
-    signal pwmi: unsigned(7 downto 0);
+    signal sig_pwmi: unsigned(7 downto 0);
 begin
     
-    pwmi <= unsigned('0' & pos) + 32;
+    sig_pwmi <= unsigned('0' & pos) + 32;
     
-    counter: process (reset, clk) begin
+    p_counter: process (reset, clk) begin
         if (reset = '1') then
-            cnt <= (others => '0');
+            sig_cnt <= (others => '0');
         elsif rising_edge(clk) then
-            if (cnt = 1279) then
-                cnt <= (others => '0');
+            if (sig_cnt = 1279) then
+                sig_cnt <= (others => '0');
             else
-                cnt <= cnt + 1;
+                sig_cnt <= sig_cnt + 1;
             end if;
         end if;
-    end process;
+    end process p_counter;
     
-    servo <= '1' when (cnt < pwmi) else '0';
+    servo <= '1' when (sig_cnt < sig_pwmi) else '0';
 end Behavioral;

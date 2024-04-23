@@ -29,7 +29,7 @@ architecture behavior of servo_controller_clk64kHz_tb IS
     signal pos2         : std_logic_vector(6 downto 0) := (others => '0');
     signal servo        : std_logic;
     signal servo2       : std_logic;
-    constant clk_period : time := 10 ns;
+    constant CLK_PERIOD : time := 10 ns;
 
 -------------------------------------------------
 
@@ -47,9 +47,9 @@ begin
   
    clk_process : process begin
         clk <= '0';
-        wait for clk_period/2;
+        wait for CLK_PERIOD/2;
         clk <= '1';
-        wait for clk_period/2;
+        wait for CLK_PERIOD/2;
    end process;
  
    
