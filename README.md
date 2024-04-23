@@ -3,7 +3,7 @@
 ### Členové týmu
 
 * Dominik Fidler (zodpovědný za - README, doladění kódu)
-* Filip Žádník (zodpovědný za - Struktura kódu)
+* Filip Žádník (zodpovědný za - Struktura kódu, simulace)
 * Matěj Hrdlička (zodpovědný za - README, RGB Controllers)
 * Vít Urban (zodpovědný za - Úprava a finalizace kódu)
 
