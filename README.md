@@ -19,11 +19,13 @@ Insert descriptive text and schematic(s) of your implementation.
 
 Put flowchats/state diagrams of your algorithm(s) and direct links to source/testbench files in `src` and `sim` folders. 
 
-### Component(s) simulation![simulace z blizka](https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114728810/31491d51-ab36-4e90-ad54-29dd67505910)![simulace z blizka](https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114728810/ef4790ef-ee75-4437-9e71-9600427c9cc0)
+### Component(s) simulation
+simulace funkcí PWM motorů
+![simulace ](https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114728810/c913d20c-7a3d-422d-84a7-c1fe0706536c)
 
+simulace zblízka - náběžná hrana spouští signál
+![simulace z blizka](https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114728810/31491d51-ab36-4e90-ad54-29dd67505910)!
 
-
-Write descriptive text and put simulation screenshots of your components.
 
 
 ## Instructions
