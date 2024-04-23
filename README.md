@@ -28,11 +28,9 @@ simulace zblízka - náběžná hrana clk_out spouští signál na servo motory
 
 
 ## Instructions
-Ovládání PWM motorů pomocí 7 spínačů, které určují binárně polohu motoru. RGB LED diody znázorňují polohu, zelená barva - 0 až 43, modrá barva - 44 až 86 a červená barva - 87 až 127.
+Ovládání PWM motorů pomocí 7 spínačů, které určují binárně polohu motoru. RGB LED diody znázorňují polohu, červená barva - 0 až 43, modrá barva - 44 až 86 a zelená barva - 87 až 127. Když se zmáčkne tlačítko resetu, tak se motor zastaví na aktuální poloze a poté se přesune na jinou nastavenou polohu.
 
 https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114609552/189e8503-0039-4d16-a9b2-e80ff4e623cc
-
-Write an instruction manual for your application, including photos and a link to a short app video.
 
 ## References
 
