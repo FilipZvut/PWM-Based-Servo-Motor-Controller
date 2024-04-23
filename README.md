@@ -10,7 +10,6 @@
 ## Theoretical description and explanation
 
 Jako zadání našeho projektu jsme si vybrali ovladač PWM servo motorů. K řešení této problematiky jsme přistoupíili takovým způsobem, že jsme si zvolili 14 tlačítek pro ovládání dvou motorů, poté jsme navrhli 2 RGB diody, které znázorňují polohu jednotlivých servo motorů. Dále jsme vytvořili tlačítko reset, které drží motory v poloze. 
-Enter a description of the problem and how to solve it.
 
 ## Hardware description of demo application
 
