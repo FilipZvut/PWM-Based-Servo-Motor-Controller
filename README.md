@@ -2,10 +2,10 @@
 
 ### Členové týmu
 
-* Dominik Fidler (responsible for ...)
-* Filip Žádník (responsible for ...)
-* Matěj Hrdlička (responsible for ...)
-* Vít Urban (responsible for ...)
+* Dominik Fidler (responsible for - README, doladění kódu)
+* Filip Žádník (responsible for - Struktura kódu)
+* Matěj Hrdlička (responsible for - README, RGB Controllers)
+* Vít Urban (responsible for - Úprava a finalizace kódu)
 
 ## Teoretický popis problému
 
