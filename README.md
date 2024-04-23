@@ -9,18 +9,33 @@
 
 ## Teoretický popis problému
 
-Jako zadání našeho projektu jsme si vybrali ovladač PWM servo motorů. K řešení této problematiky jsme přistoupíili takovým způsobem, že jsme si zvolili 14 přepínačů pro ovládání dvou na sobě nezávislých motorů, poté jsme navrhli 2 RGB diody, které znázorňují polohu jednotlivých servo motorů. Tlačítko BTNC (reset) je navrženo tak, aby při jeho stisknutí servo motory nepřijímaly nové příkazy.
+Jako zadání našeho projektu jsme si vybrali ovladač PWM servo motorů. K řešení této problematiky jsme přistoupíili takovým způsobem, že jsme si zvolili 14 (SW0-SW6) + (SW9-SW15) přepínačů pro ovládání dvou na sobě nezávislých motorů, poté jsme navrhli 2 RGB diody, které znázorňují polohu jednotlivých servo motorů. Tlačítko BTNC (reset) je navrženo tak, aby při jeho stisknutí servo motory nepřijímaly nové příkazy. 
+Pro každý servo motor je přiřazených 7 switchů, což umožní každému servu až 128 pozic.
+
+![image](https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114609552/b9a2d77b-ad37-4b39-85c9-1f665019ac6a)
+
+
+
+_PWM servo controller_
 
 ## Hardware popis
-Program ve VHDL jsme importovali na desku Nexys A7-50t, kde využíváme celkem 14 switchů pro binární zadání pozic servo motorů, které jsou ovládany přes JA a JB PMOD headry.
+Program ve VHDL jsme importovali na desku Nexys A7-50t, kde využíváme celkem 14 switchů pro binární zadání pozic servo motorů, které jsou ovládany přes JA a JB PMOD headry. Dále máme implementované tlačítko BTNC pro pozastavení. Deska Nexys A7-50t napětí 3,3V což je dostačující pro tento typ použití.
 
-<img src="https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114728810/7f086bb0-13bd-4dc6-8bc1-ec9378d10972" width="425"> <img src="https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114609552/259c79a2-7a2c-4b5c-89ca-de4d788b58a3" width = 567>                                                                                                                                
+<img src="https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114728810/7f086bb0-13bd-4dc6-8bc1-ec9378d10972" width="425"> 
 
-_použitý typ servomotoru_ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎‎ _použitá deska Nexys A7-50t_ ‎
+_použitý typ servomotoru_ ‎ 
+
+<img src="https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114609552/259c79a2-7a2c-4b5c-89ca-de4d788b58a3" width = 567>                                                                                                                                
+
+_použitá deska Nexys A7-50t_ ‎
 
 ![PMOD](https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114609552/2300790a-4b8a-4120-9727-85808ec0304b)
 
 _připojení servomotoru pomocí PMOD konektoru na desce Nexys A7-50t_
+
+Našim cílem bylo najít minimální potřebnou výstupní frekvenci 64 kHz (clk_out). To jsme získali vydělením rozsahu šířky pulzu počtem nastavitelných pozic serva.
+
+$$ f = ({2ms \over 128})^{-1} = 64kHz $$
 
 ## Software popis
 
