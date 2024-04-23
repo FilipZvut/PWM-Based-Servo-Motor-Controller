@@ -13,7 +13,6 @@ Enter a description of the problem and how to solve it.
 
 ## Hardware description of demo application
 
-Ovládání PWM motorů pomocí 7 spínačů, které určují binárně polohu motoru. RGB LED diody znázorňují polohu, zelená barva - 0 až 43, modrá barva - 44 až 86 a červená barva - 87 až 127.  
 Insert descriptive text and schematic(s) of your implementation.
 
 ## Software description
@@ -27,9 +26,10 @@ simulace funkcí PWM motorů
 simulace zblízka - náběžná hrana clk_out spouští signál na servo motory
 ![simulace z blizka](https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114728810/31491d51-ab36-4e90-ad54-29dd67505910)!
 
-https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114609552/189e8503-0039-4d16-a9b2-e80ff4e623cc
 
 ## Instructions
+Ovládání PWM motorů pomocí 7 spínačů, které určují binárně polohu motoru. RGB LED diody znázorňují polohu, zelená barva - 0 až 43, modrá barva - 44 až 86 a červená barva - 87 až 127.
+https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114609552/189e8503-0039-4d16-a9b2-e80ff4e623cc
 
 Write an instruction manual for your application, including photos and a link to a short app video.
 
