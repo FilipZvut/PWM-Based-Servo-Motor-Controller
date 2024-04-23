@@ -24,7 +24,7 @@ simulace funkcí PWM motorů
 ![simulace ](https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114728810/c913d20c-7a3d-422d-84a7-c1fe0706536c)
 
 simulace zblízka - náběžná hrana clk_out spouští signál na servo motory
-![simulace z blizka](https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114728810/31491d51-ab36-4e90-ad54-29dd67505910)!
+![simulace z blizka](https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114728810/31491d51-ab36-4e90-ad54-29dd67505910)
 
 
 ## Instructions
@@ -37,3 +37,4 @@ Write an instruction manual for your application, including photos and a link to
 ## References
 
 1. https://www.codeproject.com/Articles/513169/Servomotor-Control-with-PWM-and-VHDL
+2. https://vhdlwhiz.com/pwm-controller/
