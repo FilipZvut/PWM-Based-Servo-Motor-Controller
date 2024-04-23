@@ -27,7 +27,7 @@ simulace funkcí PWM motorů
 simulace zblízka - náběžná hrana clk_out spouští signál na servo motory
 ![simulace z blizka](https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114728810/31491d51-ab36-4e90-ad54-29dd67505910)!
 
-
+https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114609552/189e8503-0039-4d16-a9b2-e80ff4e623cc
 
 ## Instructions
 
