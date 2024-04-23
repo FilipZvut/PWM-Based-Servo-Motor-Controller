@@ -13,6 +13,7 @@ Enter a description of the problem and how to solve it.
 
 ## Hardware description of demo application
 
+Ovládání PWM motorů pomocí 7 spínačů, které určují binárně polohu motoru. RGB LED diody znázorňují polohu, zelená barva - 0 až 43, modrá barva - 44 až 86 a červená barva - 87 až 127.  
 Insert descriptive text and schematic(s) of your implementation.
 
 ## Software description
