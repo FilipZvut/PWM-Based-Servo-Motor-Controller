@@ -13,6 +13,9 @@ Jako zadání našeho projektu jsme si vybrali ovladač PWM servo motorů. K ře
 
 ## Hardware popis
 
+![servo motorek](https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114728810/7f086bb0-13bd-4dc6-8bc1-ec9378d10972)
+
+
 Insert descriptive text and schematic(s) of your implementation.
 
 ## Software popis
