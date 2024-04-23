@@ -1,6 +1,6 @@
 # PWM-Based-Servo-Motor-Controller
 
-### Team members
+### Členové týmu
 
 * Dominik Fidler (responsible for ...)
 * Filip Žádník (responsible for ...)
