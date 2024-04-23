@@ -9,6 +9,7 @@
 
 ## Theoretical description and explanation
 
+Jako zadání našeho projektu jsme si vybrali ovladač PWM servo motorů. K řešení této problematiky jsme přistoupíili takovým způsobem, že jsme si zvolili 14 tlačítek pro ovládání dvou motorů, poté jsme navrhli 2 RGB diody, které znázorňují polohu jednotlivých servo motorů. Dále jsme vytvořili tlačítko reset, které drží motory v poloze. 
 Enter a description of the problem and how to solve it.
 
 ## Hardware description of demo application
@@ -18,6 +19,7 @@ Insert descriptive text and schematic(s) of your implementation.
 ## Software description
 ![top_level struktura](https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114609552/3dc20b12-acff-41b6-9fe2-a019c41c8f2e)
 _struktura top_level_
+
 Put flowchats/state diagrams of your algorithm(s) and direct links to source/testbench files in `src` and `sim` folders. 
 
 ### Component(s) simulation
