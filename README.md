@@ -14,9 +14,16 @@ Pro každý servo motor je přiřazených 7 switchů, což umožní každému se
 
 ![image](https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114609552/b9a2d77b-ad37-4b39-85c9-1f665019ac6a)
 
-
-
 _PWM servo controller_
+
+Našim cílem bylo najít minimální potřebnou výstupní frekvenci 64 kHz (clk_out). To jsme získali vydělením rozsahu šířky pulzu počtem nastavitelných pozic serva.
+
+$$ f = ({2ms \over 128})^{-1} = 64kHz $$
+
+Pro zaručení, že naše frekvence bude mít velikost o 20ms, implementujeme counter od 0 do 1279
+
+$$ f = ({20ms * 64kHz}) = 1280 $$
+
 
 ## Hardware popis
 Program ve VHDL jsme importovali na desku Nexys A7-50t, kde využíváme celkem 14 switchů pro binární zadání pozic servo motorů, které jsou ovládany přes JA a JB PMOD headry. Dále máme implementované tlačítko BTNC pro pozastavení. Deska Nexys A7-50t napětí 3,3V což je dostačující pro tento typ použití.
@@ -33,22 +40,31 @@ _použitá deska Nexys A7-50t_ ‎
 
 _připojení servomotoru pomocí PMOD konektoru na desce Nexys A7-50t_
 
-Našim cílem bylo najít minimální potřebnou výstupní frekvenci 64 kHz (clk_out). To jsme získali vydělením rozsahu šířky pulzu počtem nastavitelných pozic serva.
-
-$$ f = ({2ms \over 128})^{-1} = 64kHz $$
 
 ## Software popis
-
-
 
 
 ![top_level struktura](https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114609552/3dc20b12-acff-41b6-9fe2-a019c41c8f2e)
 
 _struktura top_level_
 
-[Testbench](/.PWM-Based-Servo-Motor-Controller.srcs/sim_1/new/servo_controller_tb.vhd)
+[ukázka z top_level](PWM-Based-Servo-Motor-Controller.srcs/sources_1/new/top_level.vhd) <br>
+N_PERIODS je určena na 1562 z důvodu zachování správné frekvence.
 
-Put flowchats/state diagrams of your algorithm(s) and direct links to source/testbench files in `src` and `sim` folders. 
+$$ T = ({100MHz \over 64kHz}) = 1562 $$
+```
+ signal clk_out : std_logic := '0';
+begin
+    clock_enable_map : component clock_enable
+        generic map (
+            N_PERIODS => 1562
+        )
+        port map (
+            clk   => CLK100MHZ,
+            rst   => BTNC,
+            pulse => clk_out
+        );
+```
 
 ### Simulace komponent
 ![simulace ](https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114728810/c913d20c-7a3d-422d-84a7-c1fe0706536c)
@@ -61,7 +77,7 @@ _simulace funkcí PWM motorů_
 _simulace zblízka - náběžná hrana clk_out spouští signál na servo motory_
 
 ## Instrukce a video
-Ovládání PWM motorů pomocí 7 spínačů, které určují binárně polohu motoru. RGB LED diody znázorňují polohu, červená barva - 0 až 43, modrá barva - 44 až 86 a zelená barva - 87 až 127. Když se zmáčkne tlačítko resetu, tak se motor zastaví na aktuální poloze a poté se přesune na jinou nastavenou polohu.
+Na videu demonstrujeme ovládání PWM servopohonů pomocí 7 spínačů, které určují binárně polohu motoru. RGB LED diody znázorňují polohu, červená barva - 0 až 43, modrá barva - 44 až 86 a zelená barva - 87 až 127. Když se zmáčkne tlačítko resetu, tak se motor zastaví na aktuální poloze a poté se přesune na jinou nastavenou polohu. V ideálním případě se motory otočí v rozsahu 0-180 stupňů. Z důvodu nedokonalostí však nemusí být pozicování přesné.
 
 [PWM-BasedServoController](https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114609552/6cdad9c0-5efa-47d9-b98b-9a0cde744f41)
 
