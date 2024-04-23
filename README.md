@@ -2,7 +2,7 @@
 
 ### Team members
 
-* Dominik Fidler (responsible for ...)
+* Dominik Fidler (responsible for ...
 * Filip Žádník (responsible for ...)
 * Matěj Hrdlička (responsible for ...)
 * Vít Urban (responsible for ...)
