@@ -40,7 +40,7 @@ architecture Behavioral of top_level is
         port (
             clk   : in  std_logic;
             reset : in  std_logic;
-            pos   : in  std_logic_vector(6 downto 0);
+            pos   : in  std_logic_vector(6 downto 0); --7 bitové ovládání pro servo
             servo : out std_logic
         );
     end component;
@@ -48,7 +48,7 @@ architecture Behavioral of top_level is
     component rgb_controller
         port (
             reset : in  std_logic;
-            pos   : in  std_logic_vector(6 downto 0);
+            pos   : in  std_logic_vector(6 downto 0); --7 bitové ovládání pro servo
             led_b : out std_logic;
             led_r : out std_logic;
             led_g : out std_logic
@@ -59,7 +59,7 @@ architecture Behavioral of top_level is
 begin
     clock_enable_map : component clock_enable
         generic map (
-            N_PERIODS => 1562
+            N_PERIODS => 1562 -- vydělí hodinový signál tak, aby jsme dostali 64 kHz
         )
         port map (
             clk   => CLK100MHZ,
@@ -99,8 +99,8 @@ begin
             led_b => LED_B2,
             led_r => LED_R2    
         );
-   
-    LED  <= pos;
+    --indikace sepnutých switchů
+    LED  <= pos; 
     LED2 <= pos2;
     
 end Behavioral;
