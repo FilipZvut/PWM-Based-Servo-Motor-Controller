@@ -20,7 +20,7 @@ architecture Behavioral of rgb_controller is
 begin
     sig_pos_status <= unsigned(pos);
     p_led_control_proces: process (pos, reset) begin
-       
+    -- nastavení indikace polohy servomotorů pomocí RGB LED
     if (reset = '0') then   
         if (sig_pos_status <= 43) then
             led_r <= '1';
