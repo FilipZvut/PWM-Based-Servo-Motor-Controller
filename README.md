@@ -26,7 +26,7 @@ $$ periody = ({20ms * 64kHz}) = 1280 $$
 
 
 ## Hardware popis
-Program ve VHDL jsme importovali na desku Nexys A7-50t, kde využíváme celkem 14 switchů pro binární zadání pozic servo motorů, které jsou ovládany přes JA a JB PMOD headry. Dále máme implementované tlačítko BTNC pro pozastavení. Deska Nexys A7-50t napětí 3,3V což je dostačující pro tento typ použití.
+Program ve VHDL jsme importovali na desku Nexys A7-50t, kde využíváme celkem 14 switchů pro binární zadání pozic servo motorů, které jsou ovládany přes JA a JB PMOD headry. Dále máme implementované tlačítko BTNC pro pozastavení. Využíváme desku Nexys A7-50t pro přenesení programu a pro napájení desku Arduino UNO s výstupním napětím 5V, což odpovídá hodnotě v DataSheetu daných servopohonů.
 
 <img src="https://github.com/FilipZvut/PWM-Based-Servo-Motor-Controller/assets/114728810/7f086bb0-13bd-4dc6-8bc1-ec9378d10972" width="425"> 
 
