@@ -22,13 +22,13 @@ architecture Behavioral of servo_controller is
     signal sig_pwmi: unsigned(7 downto 0);
 begin
     
-    sig_pwmi <= unsigned('0' & pos) + 32;
+    sig_pwmi <= unsigned('0' & pos) + 32; --offset 32, je ekvivalentem 0,5ms, jelikož chceme signál od 0,5ms do 2,5ms
     
     p_counter: process (reset, clk) begin
         if (reset = '1') then
             sig_cnt <= (others => '0');
         elsif rising_edge(clk) then
-            if (sig_cnt = 1279) then
+            if (sig_cnt = 1279) then --cyklus pro 20 ms
                 sig_cnt <= (others => '0');
             else
                 sig_cnt <= sig_cnt + 1;
@@ -36,5 +36,5 @@ begin
         end if;
     end process p_counter;
     
-    servo <= '1' when (sig_cnt < sig_pwmi) else '0';
+    servo <= '1' when (sig_cnt < sig_pwmi) else '0'; --servo se zapíná pouze podle nastavené pozice
 end Behavioral;
