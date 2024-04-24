@@ -22,7 +22,7 @@ $$ f = ({2ms \over 128})^{-1} = 64kHz $$
 
 Pro zaručení, že naše perida bude mít velikost 20ms, implementujeme counter od 0 do 1279
 
-$$ f = ({20ms * 64kHz}) = 1280 $$
+$$ periody = ({20ms * 64kHz}) = 1280 $$
 
 
 ## Hardware popis
