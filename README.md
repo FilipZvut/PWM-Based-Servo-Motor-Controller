@@ -20,7 +20,7 @@ Našim cílem bylo najít minimální potřebnou výstupní frekvenci 64 kHz (cl
 
 $$ f = ({2ms \over 128})^{-1} = 64kHz $$
 
-Pro zaručení, že naše frekvence bude mít velikost o 20ms, implementujeme counter od 0 do 1279
+Pro zaručení, že naše perida bude mít velikost 20ms, implementujeme counter od 0 do 1279
 
 $$ f = ({20ms * 64kHz}) = 1280 $$
 
